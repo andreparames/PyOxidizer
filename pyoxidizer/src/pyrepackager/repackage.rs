@@ -1188,6 +1188,9 @@ pub fn link_libpython(
         cargo_metadata.push(format!("cargo:rustc-link-lib=static={}", library))
     }
 
+    warn!(logger, "Injecting Cocoa");
+    needed_frameworks.insert("Cocoa");
+
     for framework in needed_frameworks {
         cargo_metadata.push(format!("cargo:rustc-link-lib=framework={}", framework));
     }
