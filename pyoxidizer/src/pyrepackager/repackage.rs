@@ -1188,8 +1188,19 @@ pub fn link_libpython(
         cargo_metadata.push(format!("cargo:rustc-link-lib=static={}", library))
     }
 
-    warn!(logger, "Injecting Cocoa");
-    needed_frameworks.insert("Cocoa");
+    match env::var("PYOXIDIZER_LINK_FRAMEWORKS_PATH") {
+        Ok(path) => {
+            cargo_metadata.push(format!("cargo:rustc-link-search=framework={}", path));
+        }
+        Err(_) => info!(logger, "No frameworks path defined"),
+    }
+
+    let frameworks = env::var("PYOXIDIZER_EXTRA_FRAMEWORKS")
+        .map(|s| s.split(",").map(str::to_owned).collect())
+        .unwrap_or(vec![]);
+    for framework in frameworks.iter() {
+        needed_frameworks.insert(&framework);
+    }
 
     for framework in needed_frameworks {
         cargo_metadata.push(format!("cargo:rustc-link-lib=framework={}", framework));
