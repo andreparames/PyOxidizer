@@ -1,3 +1,10 @@
+# DO NOT DELETE, IT'S BEING USED BY STITCH!
+
+
+
+
+Original README:
+
 # PyOxidizer
 
 [![Build Status](https://dev.azure.com/gregoryszorc/PyOxidizer/_apis/build/status/indygreg.PyOxidizer?branchName=main)](https://dev.azure.com/gregoryszorc/PyOxidizer/_build/latest?definitionId=1&branchName=main)
